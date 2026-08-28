@@ -1,3 +1,3 @@
 # Flexbox-Parking-Game
 
-College assignment.
+GL;HF :D
