@@ -1,7 +1,10 @@
-const game = {
-    idx: 0,
-    elems: {},
-
+export class GameEngine {
+    constructor(levels, ui) {
+        this.levels = levels;
+        this.ui = ui;
+        this.currentLevelIndex = 0;
+    }
+    
     start() {
         // TODO: attach elements
         //
@@ -9,7 +12,7 @@ const game = {
         //game.elems.hint = document.getElementById("level-hint");
 
         game.load(0);
-    },
+    }
 
     load(idx) {
         game.idx = idx;
@@ -19,19 +22,19 @@ const game = {
         console.log("level.name: '" + level.name + "' " + "level.hint: '" + level.hint + "'");
 
         // TODO: load relevant properties from levels
-    },
+    }
 
     apply(prop, value) {
         // TODO: move objects
-    },
+    }
     
     check_solution() {
         // TODO: compare state against level's winning state
-    },
+    }
     
     reset() {
         // TODO: reload current level
-    },
+    }
     
     next_level() {
         // TODO
