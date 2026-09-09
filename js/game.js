@@ -6,22 +6,12 @@ export class GameEngine {
     }
     
     start() {
-        // TODO: attach elements
-        //
-        //game.elemss.name = document.getElementById("level-name");
-        //game.elems.hint = document.getElementById("level-hint");
-
-        game.load(0);
     }
 
-    load(idx) {
-        game.idx = idx;
-        const level = levels[idx];
+    loadCurrentLevel() {
+    }
 
-        // test connection with levels.js
-        console.log("level.name: '" + level.name + "' " + "level.hint: '" + level.hint + "'");
-
-        // TODO: load relevant properties from levels
+    handleUserInput(cssValue) {
     }
 
     apply(prop, value) {

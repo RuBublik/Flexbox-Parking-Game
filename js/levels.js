@@ -1,32 +1,16 @@
-var levels = [
+export const levels = [
     {
         id: 1,
-        name: "Hard",
-        hint: "TODO"
-    },
-    {
-        id: 2,
-        name: "Harder",
-        hint: "TODO"
-    },
-    {
-        id: 3,
-        name: "Hardest",
-        hint: "TODO"
-    },
-    {
-        id: 4,
-        name: "Hardester",
-        hint: "TODO"
-    },
-    {
-        id: 5,
-        name: "Hardestest",
-        hint: "TODO"
-    },
-    {
-        id: 6,
-        name: "Easy :D",
-        hint: "TODO"
+        instructions: "השתמש ב- <code>justify-content</code> כדי להביא את המכוניות לחניות מימין.",
+        cars: [
+            { id: 1, image: "assets/img/green-car.svg" },
+            { id: 2, image: "assets/img/red-car.svg" },
+            { id: 3, image: "assets/img/blue-car.svg" }
+        ],
+        spots: [
+            { id: 1, image: "assets/img/green-slot.svg" },
+            { id: 2, image: "assets/img/red-slot.svg" },
+            { id: 3, image: "assets/img/blue-slot.svg" }
+        ]
     }
-]
+];
