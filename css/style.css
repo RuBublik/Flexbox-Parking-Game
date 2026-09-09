@@ -62,3 +62,52 @@ main {
     max-height: 100%;
     object-fit: contain;
 }
+#css-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 6px 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    direction: ltr;
+}
+
+#css-input:focus {
+    border-color: #1f5768;
+    box-shadow: 0 0 0 2px rgba(31, 87, 104, 0.2);
+}
+
+#next-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#next-btn:hover:not(:disabled) {
+    background-color: #219653;
+}
+
+#next-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+#instructions code {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+#editor-area {
+    display: flex;
+    flex-direction: column;
+}
+
