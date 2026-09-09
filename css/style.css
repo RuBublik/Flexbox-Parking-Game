@@ -106,8 +106,3 @@ main {
     border-radius: 4px;
 }
 
-#editor-area {
-    display: flex;
-    flex-direction: column;
-}
-
