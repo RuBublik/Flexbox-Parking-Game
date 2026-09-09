@@ -19,29 +19,23 @@ export class GameEngine {
 
     handleUserInput(cssValue) {
         this.ui.applyUserCss(cssValue);
-        this.checkWinCondition();
     }
-
-    checkWinCondition(){
+    nextLevel() {
         const cars = this.ui.getCars();
         const spots = this.ui.getParkingSpots();
-
         const isWin = CollisionDetector.isAllAligned(cars, spots);
-        this.ui.setNextButtonState(isWin);
-    }
 
-    reset() {
-        this.loadCurrentLevel();
-    }
-    
-    nextLevel() {
-        if (this.currentLevelIndex < this.levels.length - 1) {
-            this.currentLevelIndex++;
-            this.loadCurrentLevel();
+        if (isWin) {
+            if (this.currentLevelIndex < this.levels.length - 1) {
+                this.currentLevelIndex++;
+                this.loadCurrentLevel();
+            } else {
+                alert('כל הכבוד! סיימת את כל השלבים! 🎉');
+                this.currentLevelIndex = 0;
+                this.loadCurrentLevel();
+            }
         } else {
-            alert('כל הכבוד! סיימת את כל השלבים! 🎉');
-            this.currentLevelIndex = 0;
-            this.loadCurrentLevel();
-        }   
-    }
+            alert('המכוניות עדיין לא בחניות הנכונות, נסה שוב! 🚗');
+        }
+    }    
 }
