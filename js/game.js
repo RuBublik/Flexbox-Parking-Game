@@ -1,3 +1,4 @@
+import { CollisionDetector } from './collision.js';
 export class GameEngine {
     constructor(levels, ui) {
         this.levels = levels;
@@ -22,18 +23,25 @@ export class GameEngine {
     }
 
     checkWinCondition(){
+        const cars = this.ui.getCars();
+        const spots = this.ui.getParkingSpots();
 
+        const isWin = CollisionDetector.isAllAligned(cars, spots);
+        this.ui.setNextButtonState(isWin);
     }
-    
+
     reset() {
-        // TODO: reload current level
+        this.loadCurrentLevel();
     }
     
     nextLevel() {
-        // TODO
+        if (this.currentLevelIndex < this.levels.length - 1) {
+            this.currentLevelIndex++;
+            this.loadCurrentLevel();
+        } else {
+            alert('כל הכבוד! סיימת את כל השלבים! 🎉');
+            this.currentLevelIndex = 0;
+            this.loadCurrentLevel();
+        }   
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    game.start();
-});
