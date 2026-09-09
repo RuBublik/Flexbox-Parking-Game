@@ -22,6 +22,7 @@ export class UI {
         }
 
         this.carsLayer.style.cssText = '';
+        this.spotsLayer.style.cssText = level.spotStyle || '';
         this.setNextButtonState(false);
         this.createBoardItems(level);
     }
