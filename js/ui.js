@@ -23,7 +23,7 @@ export class UI {
 
         this.carsLayer.style.cssText = '';
         this.spotsLayer.style.cssText = level.spotStyle || '';
-        this.setNextButtonState(false);
+        this.setNextButtonState(true);
         this.createBoardItems(level);
     }
 
@@ -65,9 +65,10 @@ export class UI {
     }
 
     onNextLevel(callback) {
-        if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', callback);
-        }
+        this.nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
     }
 
     setNextButtonState(enabled) {
