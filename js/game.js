@@ -6,27 +6,30 @@ export class GameEngine {
     }
     
     start() {
+        this.ui.onInput((cssValue) => this.handleUserInput(cssValue));
+        this.ui.onNextLevel(() => this.nextLevel());
+        this.loadCurrentLevel();
     }
 
     loadCurrentLevel() {
+        const level = this.levels[this.currentLevelIndex];
+        this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
     }
 
     handleUserInput(cssValue) {
+        this.ui.applyUserCss(cssValue);
+        this.checkWinCondition();
     }
 
-    apply(prop, value) {
-        // TODO: move objects
-    }
-    
-    check_solution() {
-        // TODO: compare state against level's winning state
+    checkWinCondition(){
+
     }
     
     reset() {
         // TODO: reload current level
     }
     
-    next_level() {
+    nextLevel() {
         // TODO
     }
 }

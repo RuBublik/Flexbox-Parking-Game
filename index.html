@@ -12,15 +12,18 @@
         <div id="sidebar">
             <section id="header">
                 <h1 class="title">Flexbox Parking Lot Game</h1>
+                <div id="level-indicator"></div>
             </section>
             
             <main>
-                <section id="controls-area">
-                    <!-- TODO: Add level selection -->
-                </section>
+                <section id="instructions">הוראות</section>
 
-                <section id="game-area">
-                    <!-- TODO: Add game area -->
+                <section id="editor-area">
+                    <div class="code-editor">
+                        <textarea id="css-input" placeholder="רשום כאן את קוד ה-CSS..." rows="4"></textarea>
+                    </div>
+                    
+                    <button id="next-btn" disabled>השלב הבא ➔</button>
                 </section>
             </main>
 
