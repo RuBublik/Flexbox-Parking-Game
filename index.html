@@ -8,30 +8,41 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <section id="header">
-        <h1 class="title">Flexbox Parking Lot Game</h1>
-    </section>
+    <div id="app">   
+        <div id="sidebar">
+            <section id="header">
+                <h1 class="title">Flexbox Parking Lot Game</h1>
+            </section>
+            
+            <main>
+                <section id="controls-area">
+                    <!-- TODO: Add level selection -->
+                </section>
 
-    <main>
-        <section id="controls-area">
-            <!-- TODO: Add level selection -->
-        </section>
+                <section id="game-area">
+                    <!-- TODO: Add game area -->
+                </section>
+            </main>
 
-        <section id="game-area">
-            <!-- TODO: Add game area -->
-        </section>
-    </main>
-
-    <footer id="footer">
-        <div id="credits-container">
-            <span id="credits-label">
-                See our
-                <a id="credits-github-link" href="https://github.com/RuBublik/Flexbox-Parking-Game" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-            </span>
+            <footer id="footer">
+                <div>
+                    <span id="credits-label">
+                        See our
+                        <a id="credits-github-link" href="https://github.com/RuBublik/Flexbox-Parking-Game" target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>
+                    </span>
+                </div>
+            </footer>
         </div>
-    </footer>
+
+        <!-- לוח המשחק -->
+        <div id="board">
+            <div id="pads-layer"></div>
+            <div id="cars-layer"></div>
+        </div>
+
+    </div>
     
     <script type="module" src="js/main.js"></script>
 </body>
