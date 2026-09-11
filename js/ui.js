@@ -15,10 +15,10 @@ export class UI {
         this.clearBoard();
 
         if (this.instructionsArea) {
-            this.instructionsArea.innerHTML = level.instructions;
+            this.instructionsArea.innerHTML += `<p>${level.instructions}</p>`;
         }
         if (this.levelIndicator) {
-            this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels}`;
+            this.levelIndicator.textContent = `Level: ${level.name}`;
         }
         if (this.userCodeInput) {
             this.userCodeInput.value = '';
