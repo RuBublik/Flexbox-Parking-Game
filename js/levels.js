@@ -76,9 +76,9 @@ export const levels = [
             { color: "blue", image: "assets/img/blue-car.svg" }
         ],
         spots: [
-            { color: "blue", image: "assets/img/blue-slot.svg" },
+            { color: "green", image: "assets/img/green-slot.svg" },
             { color: "red", image: "assets/img/red-slot.svg" },
-            { color: "green", image: "assets/img/green-slot.svg" }
+            { color: "blue", image: "assets/img/blue-slot.svg" }
         ],
         spotStyle: "flex-direction: row-reverse; justify-content: center; align-items: flex-end;"
     },
@@ -93,10 +93,35 @@ export const levels = [
             { color: "blue", image: "assets/img/blue-car.svg" }
         ],
         spots: [
-            { color: "blue", image: "assets/img/blue-slot.svg" },
+            { color: "green", image: "assets/img/green-slot.svg" },
             { color: "red", image: "assets/img/red-slot.svg" },
-            { color: "green", image: "assets/img/green-slot.svg" }
+            { color: "blue", image: "assets/img/blue-slot.svg" }
         ],
         spotStyle: "flex-direction: row-reverse; justify-content: space-between; align-items: flex-end;"
+    },
+    {
+        id: 7,
+        name: "Hardestesterest",
+        instructions: "New trick! There are more cars than fit in one row — use <code>flex-wrap: wrap;</code> so the extra cars flow onto a second row to reach their spots.",
+        hint: "flex-wrap: wrap; justify-content: center;",
+        cars: [
+            { color: "green", image: "assets/img/green-car.svg" },
+            { color: "red", image: "assets/img/red-car.svg" },
+            { color: "blue", image: "assets/img/blue-car.svg" },
+            { color: "green", image: "assets/img/green-car.svg" },
+            { color: "red", image: "assets/img/red-car.svg" },
+            { color: "blue", image: "assets/img/blue-car.svg" },
+            { color: "green", image: "assets/img/green-car.svg" }
+        ],
+        spots: [
+            { color: "green", image: "assets/img/green-slot.svg" },
+            { color: "red", image: "assets/img/red-slot.svg" },
+            { color: "blue", image: "assets/img/blue-slot.svg" },
+            { color: "green", image: "assets/img/green-slot.svg" },
+            { color: "red", image: "assets/img/red-slot.svg" },
+            { color: "blue", image: "assets/img/blue-slot.svg" },
+            { color: "green", image: "assets/img/green-slot.svg" }
+        ],
+        spotStyle: "flex-wrap: wrap; justify-content: center;"
     }
 ];
