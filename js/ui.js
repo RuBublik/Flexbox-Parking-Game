@@ -4,9 +4,11 @@ export class UI {
         this.carsLayer = document.getElementById('cars-layer');
         this.nextBtn = document.getElementById('next-btn');
         this.hintBtn = document.getElementById('hint-btn');
+        this.checkBtn = document.getElementById('check-btn');
         this.instructionsArea = document.getElementById('instructions');
         this.levelIndicator = document.getElementById('level-indicator');
         this.userCodeInput = document.getElementById('css-input-user-code');
+        this.codeEditor = document.querySelector('.code-editor');
     }
 
     renderLevel(level, levelIndex, totalLevels) {
@@ -24,7 +26,7 @@ export class UI {
 
         this.carsLayer.style.cssText = '';
         this.spotsLayer.style.cssText = level.spotStyle || '';
-        this.setNextButtonState(true);
+        this.setNextButtonState(false);
         this.createBoardItems(level);
     }
 
@@ -79,10 +81,37 @@ export class UI {
         });
     }
 
+    onCheck(callback) {
+        this.checkBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
+    }
+
     showHint(hint) {
         if (this.userCodeInput) {
             this.userCodeInput.value = hint;
         }
+    }
+
+    shakeNextBtnVertical() {
+        this.shakeElement(this.nextBtn, 'vertical');
+    }
+    shakeEditorHorizontal() {
+        this.shakeElement(this.codeEditor, 'horizontal');
+    }
+
+    shakeElement(element,direction) {
+        if (!element) return;
+
+        var effect = '';
+        if (direction === 'horizontal') { effect = 'shake-horizontal'; } 
+        else if (direction === 'vertical') { effect = 'shake-vertical'; }
+        else { return; }
+
+        element.classList.remove(effect);
+        void element.offsetWidth; // restart the animation on repeated failures
+        element.classList.add(effect);
     }
 
     setNextButtonState(enabled) {

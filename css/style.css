@@ -120,6 +120,53 @@ main {
     cursor: not-allowed;
     opacity: 0.6;
 }
+
+.editor-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+#hint-btn {
+    width: 50%;
+}
+
+#check-btn {
+    width: 50%;
+}
+
+.next-btn {
+    display: block;
+    margin: 14px auto 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+@keyframes shake-horizontal {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+@keyframes shake-vertical {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateY(-8px); }
+    40% { transform: translateY(8px); }
+    60% { transform: translateY(-6px); }
+    80% { transform: translateY(6px); }
+}
+
+.code-editor.shake-horizontal {
+    animation: shake-horizontal 0.4s ease-in-out;
+}
+
+.next-btn.shake-vertical {
+    animation: shake-vertical 0.4s ease-in-out;
+}
+
 #instructions code {
     background-color: #d1e7dd;
     color: #0f5132;
