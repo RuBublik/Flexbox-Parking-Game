@@ -1,43 +1,63 @@
-const game = {
-    idx: 0,
-    elems: {},
-
+import { CollisionDetector } from './collision.js';
+export class GameEngine {
+    constructor(levels, ui) {
+        this.levels = levels;
+        this.ui = ui;
+        this.currentLevelIndex = 0;
+    }
+    
     start() {
-        // TODO: attach elements
-        //
-        //game.elemss.name = document.getElementById("level-name");
-        //game.elems.hint = document.getElementById("level-hint");
+        this.ui.onInput((cssValue) => this.handleUserInput(cssValue));
+        this.ui.onCheck(() => this.check());
+        this.ui.onNextLevel(() => this.nextLevel());
+        this.ui.onHint(() => this.hint());
+        this.ui.onReset(() => this.reset());
+        this.loadCurrentLevel();
+    }
 
-        game.load(0);
-    },
-
-    load(idx) {
-        game.idx = idx;
-        const level = levels[idx];
-
-        // test connection with levels.js
-        console.log("level.name: '" + level.name + "' " + "level.hint: '" + level.hint + "'");
-
-        // TODO: load relevant properties from levels
-    },
-
-    apply(prop, value) {
-        // TODO: move objects
-    },
-    
-    check_solution() {
-        // TODO: compare state against level's winning state
-    },
-    
     reset() {
-        // TODO: reload current level
-    },
-    
-    next_level() {
-        // TODO
+        this.loadCurrentLevel();
+    }
+
+    loadCurrentLevel() {
+        const level = this.levels[this.currentLevelIndex];
+        this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
+    }
+
+    handleUserInput(cssValue) {
+        this.ui.applyUserCss(cssValue);
+    }
+
+    check() {
+        const cars = this.ui.getCars();
+        const spots = this.ui.getParkingSpots();
+        const isWin = CollisionDetector.isAllAligned(cars, spots);
+
+        if (isWin) {
+            this.ui.setNextButtonState(true);
+            this.ui.shakeNextBtnVertical();
+            this.ui.showFeedback('Correct! :D', true);
+        } else {
+            this.ui.setNextButtonState(false);
+            this.ui.shakeEditorHorizontal();
+            this.ui.showFeedback('Wrong, try again.', false);
+        }
+    }
+
+    nextLevel() {
+        if (this.currentLevelIndex < this.levels.length - 1) {
+            this.currentLevelIndex++;
+            this.loadCurrentLevel();
+        } else {
+            alert('Great job! You finished all levels! 🎉');
+            this.currentLevelIndex = 0;
+            this.loadCurrentLevel();
+        }
+    }
+
+    hint() {
+        const level = this.levels[this.currentLevelIndex];
+        this.ui.showHint(level.hint);
+        this.handleUserInput(level.hint);
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    game.start();
-});

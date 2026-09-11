@@ -8,33 +8,57 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <section id="header">
-        <h1 class="title">Flexbox Parking Lot Game</h1>
-    </section>
+    <div id="app">   
+        <div id="sidebar">
+            <section id="header">
+                <h1 class="title">Flexbox Parking Lot Game</h1>
+                <div id="level-indicator"></div>
+            </section>
+            
+            <main>
+                <section id="instructions">Instruction:</section>
 
-    <main>
-        <section id="controls-area">
-            <!-- TODO: Add level selection -->
-        </section>
+                <section id="editor-area">
+                    <div class="code-editor">
+                        <pre id="css-input-before">#cars-layer {</pre>
+                        <textarea id="css-input-user-code" rows="5" placeholder="Add your CSS here..."></textarea>
+                        <pre id="css-input-after">}</pre>
+                    </div>
 
-        <section id="game-area">
-            <!-- TODO: Add game area -->
-        </section>
-    </main>
+                    <div class="editor-actions">
+                        <button id="hint-btn" class="game-btn">Hint</button>
+                        <button id="check-btn" class="game-btn">Check</button>
+                        <button id="reset-btn" class="game-btn">Reset</button>
+                    </div>
 
-    <footer id="footer">
-        <div id="credits-container">
-            <span id="credits-label">
-                See our
-                <a id="credits-github-link" href="https://github.com/RuBublik/Flexbox-Parking-Game" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-            </span>
+                    <p id="check-feedback"></p>
+
+                    <button id="next-btn" class="game-btn next-btn" disabled>Next Level</button>
+                </section>
+            </main>
+
+            <footer id="footer">
+                <div>
+                    <span id="credits-label">
+                        See our
+                        <a id="credits-github-link" href="https://github.com/RuBublik/Flexbox-Parking-Game" target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>
+                    </span>
+                </div>
+            </footer>
         </div>
-    </footer>
+
+        <div id="board-area">
+            <div id="board">
+                <div id="pads-layer"></div>
+                <div id="cars-layer"></div>
+            </div>
+        </div>
+
+    </div>
     
-    <script src="js/levels.js"></script>
-    <script src="js/game.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
 
