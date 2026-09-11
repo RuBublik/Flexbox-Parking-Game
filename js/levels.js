@@ -68,7 +68,7 @@ export const levels = [
     {
         id: 5,
         name: "Hardestest",
-        instructions: "Advanced! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, space them out edge to edge, and bring them down to the bottom.",
+        instructions: "Advanced! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, center them, and bring them down to the bottom.",
         hint: "flex-direction: row-reverse; justify-content: center; align-items: flex-end;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
@@ -85,7 +85,7 @@ export const levels = [
     {
         id: 6,
         name: "Hardestester",
-        instructions: "Advanced! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, space them out edge to edge, and bring them down to the bottom.",
+        instructions: "Final challenge! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, space them out edge to edge, and bring them down to the bottom.",
         hint: "flex-direction: row-reverse; justify-content: space-between; align-items: flex-end;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
