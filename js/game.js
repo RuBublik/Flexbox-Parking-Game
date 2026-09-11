@@ -8,6 +8,8 @@ export class GameEngine {
         this.score = 0;
         this.hintUsedForCurrentLevel = false;
         this.scoredCurrentLevel = false;
+        this.currentUserCss = '';
+        this.state = {}; // levelIndex -> { solution: cssText, hintUsed: boolean }
     }
 
     start() {
@@ -22,17 +24,32 @@ export class GameEngine {
     }
 
     reset() {
-        this.loadCurrentLevel();
+        this.applyLevelState();
+        this.currentUserCss = '';
     }
 
     loadCurrentLevel() {
+        const alreadySolved = this.applyLevelState();
+
+        if (alreadySolved) {
+            const savedState = this.state[this.currentLevelIndex];
+            if (savedState) {
+                this.ui.setUserCode(savedState.solution);
+                this.handleUserInput(savedState.solution);
+            }
+        }
+    }
+
+    applyLevelState() {
         const level = this.levels[this.currentLevelIndex];
         const alreadySolved = this.currentLevelIndex < this.highestLevelReached;
-        this.hintUsedForCurrentLevel = false;
+        const savedState = this.state[this.currentLevelIndex];
+        this.hintUsedForCurrentLevel = savedState ? savedState.hintUsed : false;
         this.scoredCurrentLevel = alreadySolved; // revisiting a solved level does not re-score it
         this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
         this.ui.setNextButtonState(alreadySolved);
         this.ui.setPrevButtonState(this.currentLevelIndex > 0);
+        return alreadySolved;
     }
 
     prevLevel() {
@@ -43,7 +60,23 @@ export class GameEngine {
     }
 
     handleUserInput(cssValue) {
+        this.currentUserCss = cssValue;
         this.ui.applyUserCss(cssValue);
+    }
+
+    saveLevelState() {
+        this.state[this.currentLevelIndex] = {
+            solution: this.currentUserCss,
+            hintUsed: this.hintUsedForCurrentLevel,
+        };
+    }
+
+    updateScore() {
+        if (!this.scoredCurrentLevel) {
+            this.score += this.hintUsedForCurrentLevel ? 1 : 10;
+            this.scoredCurrentLevel = true;
+            this.ui.updateScore(this.score);
+        }
     }
 
     check() {
@@ -55,12 +88,8 @@ export class GameEngine {
             this.ui.setNextButtonState(true);
             this.ui.shakeNextBtnVertical();
             this.ui.showFeedback('Correct! :D', true);
-
-            if (!this.scoredCurrentLevel) {
-                this.score += this.hintUsedForCurrentLevel ? 1 : 10;
-                this.scoredCurrentLevel = true;
-                this.ui.updateScore(this.score);
-            }
+            this.updateScore();
+            this.saveLevelState();
         } else {
             this.ui.shakeEditorHorizontal();
             this.ui.showFeedback('Wrong, try again.', false);

@@ -113,10 +113,14 @@ export class UI {
         });
     }
 
-    showHint(hint) {
+    setUserCode(value) {
         if (this.userCodeInput) {
-            this.userCodeInput.value = hint;
+            this.userCodeInput.value = value;
         }
+    }
+
+    showHint(hint) {
+        this.setUserCode(hint);
     }
 
     updateScore(score) {
