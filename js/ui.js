@@ -3,14 +3,22 @@ export class UI {
         this.spotsLayer = document.getElementById('pads-layer');
         this.carsLayer = document.getElementById('cars-layer');
         this.nextBtn = document.getElementById('next-btn');
+        this.prevBtn = document.getElementById('prev-btn');
         this.hintBtn = document.getElementById('hint-btn');
         this.checkBtn = document.getElementById('check-btn');
         this.resetBtn = document.getElementById('reset-btn');
         this.instructionsArea = document.getElementById('instructions');
-        this.levelIndicator = document.getElementById('level-indicator');
+        this.score = document.getElementById('score-number');
+        this.levelIndicatorNumeric = document.getElementById('level-indicator-numeric');
+        this.levelIndicatorName = document.getElementById('level-indicator-name');
         this.userCodeInput = document.getElementById('css-input-user-code');
         this.codeEditor = document.querySelector('.code-editor');
         this.feedbackEl = document.getElementById('check-feedback');
+        this.cssInputBefore = document.getElementById('css-input-before');
+        this.cssInputAfter = document.getElementById('css-input-after');
+        this.styleTag = document.getElementById('game-styles');
+        this.currentCssGiven = '';
+        this.currentTemplate = '';
     }
 
     renderLevel(level, levelIndex, totalLevels) {
@@ -19,8 +27,9 @@ export class UI {
         if (this.instructionsArea) {
             this.instructionsArea.innerHTML = `<p>${level.instructions}</p>`;
         }
-        if (this.levelIndicator) {
-            this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels} — ${level.name}`;
+        if (this.levelIndicatorNumeric && this.levelIndicatorName) {
+            this.levelIndicatorNumeric.textContent = `Level: ${levelIndex + 1} of ${totalLevels}`;
+            this.levelIndicatorName.textContent = `${level.name}`;
         }
         if (this.userCodeInput) {
             this.userCodeInput.value = '';
@@ -30,9 +39,15 @@ export class UI {
             this.feedbackEl.className = '';
         }
 
-        this.carsLayer.style.cssText = '';
+        this.currentCssGiven = level.cssGiven || '';
+        this.currentTemplate = level.template;
+        if (this.cssInputBefore && this.cssInputAfter) {
+            this.cssInputBefore.textContent = (this.currentCssGiven ? this.currentCssGiven + '\n\n' : '') + this.currentTemplate + ' {';
+            this.cssInputAfter.textContent = '}';
+        }
+
+        this.applyUserCss('');
         this.spotsLayer.style.cssText = level.spotStyle || '';
-        this.setNextButtonState(false);
         this.createBoardItems(level);
     }
 
@@ -66,7 +81,8 @@ export class UI {
     }
 
     applyUserCss(cssText) {
-        this.carsLayer.style.cssText = cssText;
+        const given = this.currentCssGiven ? this.currentCssGiven + '\n\n' : '';
+        this.styleTag.textContent = `${given}${this.currentTemplate} {\n${cssText}\n}`;
     }
 
     onInput(callback) {
@@ -77,6 +93,13 @@ export class UI {
 
     onNextLevel(callback) {
         this.nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
+    }
+
+    onPrevLevel(callback) {
+        this.prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             callback();
         });
@@ -103,9 +126,19 @@ export class UI {
         });
     }
 
-    showHint(hint) {
+    setUserCode(value) {
         if (this.userCodeInput) {
-            this.userCodeInput.value = hint;
+            this.userCodeInput.value = value;
+        }
+    }
+
+    showHint(hint) {
+        this.setUserCode(hint);
+    }
+
+    updateScore(score) {
+        if (this.score) {
+            this.score.textContent = `${score}`;
         }
     }
 
@@ -138,6 +171,12 @@ export class UI {
     setNextButtonState(enabled) {
         if (this.nextBtn) {
             this.nextBtn.disabled = !enabled;
+        }
+    }
+
+    setPrevButtonState(enabled) {
+        if (this.prevBtn) {
+            this.prevBtn.disabled = !enabled;
         }
     }
 

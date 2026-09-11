@@ -162,11 +162,16 @@ main {
     color: #c0392b;
 }
 
-.next-btn {
-    display: block;
-    margin: 14px auto 0;
-    width: 100%;
-    max-width: 400px;
+.nav-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.nav-actions .game-btn {
+    flex: 1;
+    max-width: 200px;
 }
 
 @keyframes shake-horizontal {
@@ -207,8 +212,7 @@ main {
 }
 
 #level-indicator {
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin: 50px auto;
     font-size: 1.5rem;
     font-weight: bold;
     color: #1f5768;
@@ -247,4 +251,18 @@ main {
 #footer {
     margin-top: 20px;
     margin-bottom: 10px;
+}
+
+#score-area {
+    margin-top: 1px;
+    font-weight: bold;
+    color: #1f5768;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1f5768;
 }

@@ -6,13 +6,18 @@
     <title>Flexbox Parking Lot Game</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
+    <style id="game-styles"></style>
   </head>
   <body>
     <div id="app">   
         <div id="sidebar">
             <section id="header">
                 <h1 class="title">Flexbox Parking Lot Game</h1>
-                <div id="level-indicator"></div>
+                <section id="level-indicator">
+                    <span id="level-indicator-numeric"></span>
+                    <br>
+                    <span id="level-indicator-name"></span>
+                </section>
             </section>
             
             <main>
@@ -33,7 +38,15 @@
 
                     <p id="check-feedback"></p>
 
-                    <button id="next-btn" class="game-btn next-btn" disabled>Next Level</button>
+                    <div class="nav-actions">
+                        <button id="prev-btn" class="game-btn prev-btn">&larr; Prev. Level</button>
+                        <button id="next-btn" class="game-btn next-btn">Next Level &rarr;</button>
+                    </div>
+                </section>
+
+                <section id="score-area">
+                    <div id="score-label">Score:</div>
+                    <div id="score-number"></div>
                 </section>
             </main>
 
