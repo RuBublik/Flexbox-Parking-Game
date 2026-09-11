@@ -62,20 +62,41 @@ main {
     max-height: 100%;
     object-fit: contain;
 }
-#css-input {
-    width: 100%;
+.code-editor {
+    text-align: left;
+    direction: ltr;
+    background-color: #f5f7f8;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 8px;
+    padding: 8px 10px;
     margin: 6px 0;
-    font-family: inherit;
+    font-family: 'Consolas', 'Courier New', monospace;
     font-size: 0.9rem;
-    direction: ltr;
 }
 
-#css-input:focus {
+.code-editor:focus-within {
     border-color: #1f5768;
     box-shadow: 0 0 0 2px rgba(31, 87, 104, 0.2);
+}
+
+.code-editor pre {
+    margin: 0;
+    color: #1f5768;
+    font-weight: bold;
+    font-family: inherit;
+}
+
+#css-input-user-code {
+    display: block;
+    width: 100%;
+    margin: 2px 0;
+    padding: 0 0 0 20px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    background: transparent;
+    font: inherit;
+    color: #222;
 }
 
 #next-btn {

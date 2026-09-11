@@ -2,6 +2,7 @@ export const levels = [
     {
         id: 1,
         instructions: "Use <code>justify-content</code> to spread the cars out evenly across their parking spots.",
+        hint: "justify-content: space-between;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
             { color: "red", image: "assets/img/red-car.svg" },
@@ -17,6 +18,7 @@ export const levels = [
     {
         id: 2,
         instructions: "Use <code>justify-content</code> to center the cars in the parking lot.",
+        hint: "justify-content: center;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
             { color: "red", image: "assets/img/red-car.svg" }
@@ -30,6 +32,7 @@ export const levels = [
     {
         id: 3,
         instructions: "Combine two properties! Use <code>justify-content</code> and <code>align-items</code> to center the cars at the bottom of the lot.",
+        hint: "justify-content: center; align-items: flex-end;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
             { color: "red", image: "assets/img/red-car.svg" },
@@ -45,6 +48,7 @@ export const levels = [
     {
         id: 4,
         instructions: "Switch the layout to a column using <code>flex-direction: column;</code> and space the cars out vertically using <code>justify-content</code>.",
+        hint: "flex-direction: column; justify-content: space-between;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
             { color: "red", image: "assets/img/red-car.svg" },
@@ -60,6 +64,7 @@ export const levels = [
     {
         id: 5,
         instructions: "Advanced! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, space them out edge to edge, and bring them down to the bottom.",
+        hint: "flex-direction: row-reverse; justify-content: space-between; align-items: flex-end;",
         cars: [
             { color: "green", image: "assets/img/green-car.svg" },
             { color: "red", image: "assets/img/red-car.svg" },

@@ -2,10 +2,10 @@ export class UI {
     constructor() {
         this.spotsLayer = document.getElementById('pads-layer');
         this.carsLayer = document.getElementById('cars-layer');
-        this.cssInput = document.getElementById('css-input');
         this.nextBtn = document.getElementById('next-btn');
         this.instructionsArea = document.getElementById('instructions');
         this.levelIndicator = document.getElementById('level-indicator');
+        this.userCodeInput = document.getElementById('css-input-user-code');
     }
 
     renderLevel(level, levelIndex, totalLevels) {
@@ -17,8 +17,9 @@ export class UI {
         if (this.levelIndicator) {
             this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels}`;
         }
-        if (this.cssInput) {
-            this.cssInput.value = '';
+        if (this.userCodeInput) {
+            this.userCodeInput.value = '';
+            this.userCodeInput.placeholder = level.hint;
         }
 
         this.carsLayer.style.cssText = '';
@@ -59,8 +60,8 @@ export class UI {
     }
 
     onInput(callback) {
-        if (this.cssInput) {
-            this.cssInput.addEventListener('input', (e) => callback(e.target.value));
+        if (this.userCodeInput) {
+            this.userCodeInput.addEventListener('input', (e) => callback(e.target.value));
         }
     }
 
