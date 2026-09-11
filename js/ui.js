@@ -15,7 +15,7 @@ export class UI {
             this.instructionsArea.innerHTML = level.instructions;
         }
         if (this.levelIndicator) {
-            this.levelIndicator.textContent = `שלב ${levelIndex + 1} מתוך ${totalLevels}`;
+            this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels}`;
         }
         if (this.cssInput) {
             this.cssInput.value = '';
@@ -33,7 +33,6 @@ export class UI {
     }
 
     createBoardItems(level) {
-        // יצירת חניות
         level.spots.forEach(spot => {
             const spotEl = document.createElement('div');
             spotEl.className = 'parking-spot';
@@ -43,7 +42,6 @@ export class UI {
             this.spotsLayer.appendChild(spotEl);
         });
 
-        // יצירת מכוניות
         level.cars.forEach(car => {
             const carEl = document.createElement('div');
             carEl.className = 'car';

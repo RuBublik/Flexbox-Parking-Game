@@ -1,7 +1,7 @@
 export const levels = [
     {
         id: 1,
-        instructions: "השתמש ב- ???? כדי להביא את המכוניות לחניות מימין.",
+        instructions: "Use <code>justify-content</code> to spread the cars out evenly across their parking spots.",
         cars: [
             { id: 1, image: "assets/img/green-car.svg" },
             { id: 2, image: "assets/img/red-car.svg" },
@@ -16,7 +16,7 @@ export const levels = [
     },
     {
         id: 2,
-        instructions: "השתמש ב- <code>justify-content</code> כדי למרכז את המכוניות בחניון.",
+        instructions: "Use <code>justify-content</code> to center the cars in the parking lot.",
         cars: [
             { id: 1, image: "assets/img/green-car.svg" },
             { id: 2, image: "assets/img/red-car.svg" }
@@ -29,7 +29,7 @@ export const levels = [
     },
     {
         id: 3,
-        instructions: "שלב שתי תכונות! השתמש ב- <code>justify-content</code> וב- <code>align-items</code> כדי למרכז את המכוניות בתחתית החניון.",
+        instructions: "Combine two properties! Use <code>justify-content</code> and <code>align-items</code> to center the cars at the bottom of the lot.",
         cars: [
             { id: 1, image: "assets/img/green-car.svg" },
             { id: 2, image: "assets/img/red-car.svg" },
@@ -44,7 +44,7 @@ export const levels = [
     },
     {
         id: 4,
-        instructions: "שנה את סדר התצוגה לטור בעזרת <code>flex-direction: column;</code> ורווח את המכוניות אנכית בעזרת <code>justify-content</code>.",
+        instructions: "Switch the layout to a column using <code>flex-direction: column;</code> and space the cars out vertically using <code>justify-content</code>.",
         cars: [
             { id: 1, image: "assets/img/green-car.svg" },
             { id: 2, image: "assets/img/red-car.svg" },
@@ -59,7 +59,7 @@ export const levels = [
     },
     {
         id: 5,
-        instructions: "שלב מתקדם! הפוך את סדר המכוניות אופקית בעזרת <code>flex-direction: row-reverse;</code>, רווח אותן מקצה לקצה והורד אותן לתחתית.",
+        instructions: "Advanced! Reverse the cars' horizontal order using <code>flex-direction: row-reverse;</code>, space them out edge to edge, and bring them down to the bottom.",
         cars: [
             { id: 1, image: "assets/img/green-car.svg" },
             { id: 2, image: "assets/img/red-car.svg" },

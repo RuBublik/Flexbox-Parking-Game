@@ -30,12 +30,12 @@ export class GameEngine {
                 this.currentLevelIndex++;
                 this.loadCurrentLevel();
             } else {
-                alert('כל הכבוד! סיימת את כל השלבים! 🎉');
+                alert('Great job! You finished all levels! 🎉');
                 this.currentLevelIndex = 0;
                 this.loadCurrentLevel();
             }
         } else {
-            alert('המכוניות עדיין לא בחניות הנכונות, נסה שוב! 🚗');
+            alert('Cars are not in the right spots yet, try again!');
         }
     }    
 }
