@@ -15,7 +15,7 @@ export class UI {
         this.clearBoard();
 
         if (this.instructionsArea) {
-            this.instructionsArea.innerHTML += `<p>${level.instructions}</p>`;
+            this.instructionsArea.innerHTML = `<p>${level.instructions}</p>`;
         }
         if (this.levelIndicator) {
             this.levelIndicator.textContent = `Level: ${level.name}`;
@@ -42,6 +42,7 @@ export class UI {
             spotEl.dataset.color = spot.color;
             const img = document.createElement('img');
             img.src = spot.image;
+            img.alt = `${spot.color} parking spot`;
             spotEl.appendChild(img);
             this.spotsLayer.appendChild(spotEl);
         });
@@ -52,6 +53,7 @@ export class UI {
             carEl.dataset.color = car.color;
             const img = document.createElement('img');
             img.src = car.image;
+            img.alt = `${car.color} car`;
             carEl.appendChild(img);
             this.carsLayer.appendChild(carEl);
         });

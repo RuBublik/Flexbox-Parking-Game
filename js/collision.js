@@ -2,7 +2,7 @@ export class CollisionDetector {
     static isAllAligned(cars, spots) {
         if (cars.length === 0 || cars.length !== spots.length) return false;
 
-        const threshold = 15;
+        const ALIGNMENT_THRESHOLD_PX = 15;
 
         for (let i = 0; i < cars.length; i++) {
             const carEl = cars[i];
@@ -18,7 +18,7 @@ export class CollisionDetector {
 
                     const xDiff = Math.abs(carElRect.left - spotElRect.left);
                     const yDiff = Math.abs(carElRect.top - spotElRect.top);
-                    if (xDiff <= threshold && yDiff <= threshold) {
+                    if (xDiff <= ALIGNMENT_THRESHOLD_PX && yDiff <= ALIGNMENT_THRESHOLD_PX) {
                         isCloseEnough = true;
                         break;
                     }
