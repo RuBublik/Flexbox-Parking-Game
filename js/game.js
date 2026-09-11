@@ -9,6 +9,7 @@ export class GameEngine {
     start() {
         this.ui.onInput((cssValue) => this.handleUserInput(cssValue));
         this.ui.onNextLevel(() => this.nextLevel());
+        this.ui.onHint(() => this.hint());
         this.loadCurrentLevel();
     }
 
@@ -38,4 +39,11 @@ export class GameEngine {
             alert('Cars are not in the right spots yet, try again!');
         }
     }    
+
+    hint() {
+        const level = this.levels[this.currentLevelIndex];
+        this.ui.showHint(level.hint);
+        this.handleUserInput(level.hint);
+        this.ui.setNextButtonState(true);
+    }
 }

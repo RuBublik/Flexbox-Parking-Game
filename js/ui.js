@@ -3,6 +3,7 @@ export class UI {
         this.spotsLayer = document.getElementById('pads-layer');
         this.carsLayer = document.getElementById('cars-layer');
         this.nextBtn = document.getElementById('next-btn');
+        this.hintBtn = document.getElementById('hint-btn');
         this.instructionsArea = document.getElementById('instructions');
         this.levelIndicator = document.getElementById('level-indicator');
         this.userCodeInput = document.getElementById('css-input-user-code');
@@ -19,7 +20,6 @@ export class UI {
         }
         if (this.userCodeInput) {
             this.userCodeInput.value = '';
-            this.userCodeInput.placeholder = level.hint;
         }
 
         this.carsLayer.style.cssText = '';
@@ -70,6 +70,19 @@ export class UI {
             e.preventDefault();
             callback();
         });
+    }
+
+    onHint(callback) {
+        this.hintBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
+    }
+
+    showHint(hint) {
+        if (this.userCodeInput) {
+            this.userCodeInput.value = hint;
+        }
     }
 
     setNextButtonState(enabled) {
