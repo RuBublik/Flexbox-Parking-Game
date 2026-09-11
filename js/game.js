@@ -52,8 +52,16 @@ export class GameEngine {
     }
 
     reset() {
-        this.applyLevelState();
+        this.currentLevelIndex = 0;
+        this.highestLevelSolved = 0;
+        this.score = 0;
+        this.hintUsedForCurrentLevel = false;
         this.currentUserCss = '';
+        this.state = {};
+
+        this.ui.updateScore(this.score);
+        this.applyLevelState();
+        this.saveProgress();
     }
 
     loadCurrentLevel() {
