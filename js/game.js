@@ -1,4 +1,7 @@
 import { CollisionDetector } from './collision.js';
+
+const STORAGE_KEY = 'flexboxParkingGame';
+
 export class GameEngine {
     constructor(levels, ui) {
         this.levels = levels;
@@ -10,6 +13,31 @@ export class GameEngine {
         this.scoredCurrentLevel = false;
         this.currentUserCss = '';
         this.state = {}; // levelIndex -> { solution: cssText, hintUsed: boolean }
+
+        this.loadProgress();
+    }
+
+    loadProgress() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (saved) {
+                this.currentLevelIndex = saved.currentLevelIndex || 0;
+                this.highestLevelReached = saved.highestLevelReached || 0;
+                this.score = saved.score || 0;
+                this.state = saved.state || {};
+            }
+        } catch (e) {
+            // corrupt or missing data - keep defaults
+        }
+    }
+
+    saveProgress() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            currentLevelIndex: this.currentLevelIndex,
+            highestLevelReached: this.highestLevelReached,
+            score: this.score,
+            state: this.state,
+        }));
     }
 
     start() {
@@ -56,6 +84,7 @@ export class GameEngine {
         if (this.currentLevelIndex > 0) {
             this.currentLevelIndex--;
             this.loadCurrentLevel();
+            this.saveProgress();
         }
     }
 
@@ -90,6 +119,7 @@ export class GameEngine {
             this.ui.showFeedback('Correct! :D', true);
             this.updateScore();
             this.saveLevelState();
+            this.saveProgress();
         } else {
             this.ui.shakeEditorHorizontal();
             this.ui.showFeedback('Wrong, try again.', false);
@@ -103,6 +133,7 @@ export class GameEngine {
                 this.highestLevelReached = this.currentLevelIndex;
             }
             this.loadCurrentLevel();
+            this.saveProgress();
         } else {
             alert('Great job! You finished all levels! Score: ' + this.score);
         }
