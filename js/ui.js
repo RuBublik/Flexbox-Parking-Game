@@ -36,6 +36,7 @@ export class UI {
         level.spots.forEach(spot => {
             const spotEl = document.createElement('div');
             spotEl.className = 'parking-spot';
+            spotEl.dataset.color = spot.color;
             const img = document.createElement('img');
             img.src = spot.image;
             spotEl.appendChild(img);
@@ -45,6 +46,7 @@ export class UI {
         level.cars.forEach(car => {
             const carEl = document.createElement('div');
             carEl.className = 'car';
+            carEl.dataset.color = car.color;
             const img = document.createElement('img');
             img.src = car.image;
             carEl.appendChild(img);

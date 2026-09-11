@@ -5,16 +5,30 @@ export class CollisionDetector {
         const threshold = 15;
 
         for (let i = 0; i < cars.length; i++) {
-            const carRect = cars[i].getBoundingClientRect();
-            const spotRect = spots[i].getBoundingClientRect();
+            const carEl = cars[i];
+            const carElColor = carEl.dataset.color;
 
-            const xDiff = Math.abs(carRect.left - spotRect.left);
-            const yDiff = Math.abs(carRect.top - spotRect.top);
+            const carElRect = carEl.getBoundingClientRect();
 
-            if (xDiff > threshold || yDiff > threshold) {
+            let isCloseEnough = false;
+            for (let j = 0; j < spots.length; j++) {
+                if (spots[j].dataset.color === carElColor) {
+                    const spotEl = spots[j];
+                    const spotElRect = spotEl.getBoundingClientRect();
+
+                    const xDiff = Math.abs(carElRect.left - spotElRect.left);
+                    const yDiff = Math.abs(carElRect.top - spotElRect.top);
+                    if (xDiff <= threshold && yDiff <= threshold) {
+                        isCloseEnough = true;
+                        break;
+                    }
+                }
+            }
+            if (!isCloseEnough) {
                 return false;
             }
         }
+
         return true;
     }
 }
