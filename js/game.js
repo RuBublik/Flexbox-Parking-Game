@@ -7,10 +7,9 @@ export class GameEngine {
         this.levels = levels;
         this.ui = ui;
         this.currentLevelIndex = 0;
-        this.highestLevelReached = 0;
+        this.highestLevelSolved = 0;
         this.score = 0;
         this.hintUsedForCurrentLevel = false;
-        this.scoredCurrentLevel = false;
         this.currentUserCss = '';
         this.state = {}; // levelIndex -> { solution: cssText, hintUsed: boolean }
 
@@ -22,7 +21,7 @@ export class GameEngine {
             const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
             if (saved) {
                 this.currentLevelIndex = saved.currentLevelIndex || 0;
-                this.highestLevelReached = saved.highestLevelReached || 0;
+                this.highestLevelSolved = saved.highestLevelSolved || 0;
                 this.score = saved.score || 0;
                 this.state = saved.state || {};
             }
@@ -34,7 +33,7 @@ export class GameEngine {
     saveProgress() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
             currentLevelIndex: this.currentLevelIndex,
-            highestLevelReached: this.highestLevelReached,
+            highestLevelSolved: this.highestLevelSolved,
             score: this.score,
             state: this.state,
         }));
@@ -78,10 +77,9 @@ export class GameEngine {
 
     applyLevelState() {
         const level = this.levels[this.currentLevelIndex];
-        const alreadySolved = this.currentLevelIndex < this.highestLevelReached;
+        const alreadySolved = this.currentLevelIndex < this.highestLevelSolved;
         const savedState = this.state[this.currentLevelIndex];
         this.hintUsedForCurrentLevel = savedState ? savedState.hintUsed : false;
-        this.scoredCurrentLevel = alreadySolved; // revisiting a solved level does not re-score it
         this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
         this.ui.setNextButtonState(alreadySolved);
         this.ui.setPrevButtonState(this.currentLevelIndex > 0);
@@ -109,9 +107,9 @@ export class GameEngine {
     }
 
     updateScore() {
-        if (!this.scoredCurrentLevel) {
+        const alreadyScored = this.currentLevelIndex <= this.highestLevelSolved;
+        if (!alreadyScored) {
             this.score += this.hintUsedForCurrentLevel ? 1 : 10;
-            this.scoredCurrentLevel = true;
             this.ui.updateScore(this.score);
         }
     }
@@ -125,7 +123,11 @@ export class GameEngine {
             this.ui.setNextButtonState(true);
             this.ui.shakeNextBtnVertical();
             this.ui.showFeedback('Correct! :D', true);
+            
             this.updateScore();
+            if (this.currentLevelIndex > this.highestLevelSolved) {
+                this.highestLevelSolved = this.currentLevelIndex;
+            }
             this.saveLevelState();
             this.saveProgress();
         } else {
@@ -137,9 +139,6 @@ export class GameEngine {
     nextLevel() {
         if (this.currentLevelIndex < this.levels.length - 1) {
             this.currentLevelIndex++;
-            if (this.currentLevelIndex > this.highestLevelReached) {
-                this.highestLevelReached = this.currentLevelIndex;
-            }
             this.loadCurrentLevel();
             this.saveProgress();
         } else {
