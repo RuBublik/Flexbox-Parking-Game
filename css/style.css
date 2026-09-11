@@ -252,3 +252,17 @@ main {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+#score-area {
+    margin-top: 1px;
+    font-weight: bold;
+    color: #1f5768;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1f5768;
+}

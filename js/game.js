@@ -5,6 +5,9 @@ export class GameEngine {
         this.ui = ui;
         this.currentLevelIndex = 0;
         this.highestLevelReached = 0;
+        this.score = 0;
+        this.hintUsedForCurrentLevel = false;
+        this.scoredCurrentLevel = false;
     }
 
     start() {
@@ -14,6 +17,7 @@ export class GameEngine {
         this.ui.onPrevLevel(() => this.prevLevel());
         this.ui.onHint(() => this.hint());
         this.ui.onReset(() => this.reset());
+        this.ui.updateScore(this.score);
         this.loadCurrentLevel();
     }
 
@@ -24,6 +28,8 @@ export class GameEngine {
     loadCurrentLevel() {
         const level = this.levels[this.currentLevelIndex];
         const alreadySolved = this.currentLevelIndex < this.highestLevelReached;
+        this.hintUsedForCurrentLevel = false;
+        this.scoredCurrentLevel = alreadySolved; // revisiting a solved level does not re-score it
         this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
         this.ui.setNextButtonState(alreadySolved);
         this.ui.setPrevButtonState(this.currentLevelIndex > 0);
@@ -49,8 +55,13 @@ export class GameEngine {
             this.ui.setNextButtonState(true);
             this.ui.shakeNextBtnVertical();
             this.ui.showFeedback('Correct! :D', true);
+
+            if (!this.scoredCurrentLevel) {
+                this.score += this.hintUsedForCurrentLevel ? 1 : 10;
+                this.scoredCurrentLevel = true;
+                this.ui.updateScore(this.score);
+            }
         } else {
-            this.ui.setNextButtonState(false);
             this.ui.shakeEditorHorizontal();
             this.ui.showFeedback('Wrong, try again.', false);
         }
@@ -64,12 +75,13 @@ export class GameEngine {
             }
             this.loadCurrentLevel();
         } else {
-            alert('Great job! You finished all levels! 🎉');
+            alert('Great job! You finished all levels! Score: ' + this.score);
         }
     }
 
     hint() {
         const level = this.levels[this.currentLevelIndex];
+        this.hintUsedForCurrentLevel = true;
         this.ui.showHint(level.hint);
         this.handleUserInput(level.hint);
     }

@@ -8,6 +8,7 @@ export class UI {
         this.checkBtn = document.getElementById('check-btn');
         this.resetBtn = document.getElementById('reset-btn');
         this.instructionsArea = document.getElementById('instructions');
+        this.score = document.getElementById('score-number');
         this.levelIndicatorNumeric = document.getElementById('level-indicator-numeric');
         this.levelIndicatorName = document.getElementById('level-indicator-name');
         this.userCodeInput = document.getElementById('css-input-user-code');
@@ -115,6 +116,12 @@ export class UI {
     showHint(hint) {
         if (this.userCodeInput) {
             this.userCodeInput.value = hint;
+        }
+    }
+
+    updateScore(score) {
+        if (this.score) {
+            this.score.textContent = `${score}`;
         }
     }
 
