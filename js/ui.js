@@ -14,6 +14,11 @@ export class UI {
         this.userCodeInput = document.getElementById('css-input-user-code');
         this.codeEditor = document.querySelector('.code-editor');
         this.feedbackEl = document.getElementById('check-feedback');
+        this.cssInputBefore = document.getElementById('css-input-before');
+        this.cssInputAfter = document.getElementById('css-input-after');
+        this.styleTag = document.getElementById('game-styles');
+        this.currentCssGiven = '';
+        this.currentTemplate = '';
     }
 
     renderLevel(level, levelIndex, totalLevels) {
@@ -34,7 +39,14 @@ export class UI {
             this.feedbackEl.className = '';
         }
 
-        this.carsLayer.style.cssText = '';
+        this.currentCssGiven = level.cssGiven || '';
+        this.currentTemplate = level.template;
+        if (this.cssInputBefore && this.cssInputAfter) {
+            this.cssInputBefore.textContent = (this.currentCssGiven ? this.currentCssGiven + '\n\n' : '') + this.currentTemplate + ' {';
+            this.cssInputAfter.textContent = '}';
+        }
+
+        this.applyUserCss('');
         this.spotsLayer.style.cssText = level.spotStyle || '';
         this.createBoardItems(level);
     }
@@ -69,7 +81,8 @@ export class UI {
     }
 
     applyUserCss(cssText) {
-        this.carsLayer.style.cssText = cssText;
+        const given = this.currentCssGiven ? this.currentCssGiven + '\n\n' : '';
+        this.styleTag.textContent = `${given}${this.currentTemplate} {\n${cssText}\n}`;
     }
 
     onInput(callback) {
