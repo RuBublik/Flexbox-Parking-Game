@@ -4,12 +4,14 @@ export class GameEngine {
         this.levels = levels;
         this.ui = ui;
         this.currentLevelIndex = 0;
+        this.highestLevelReached = 0;
     }
-    
+
     start() {
         this.ui.onInput((cssValue) => this.handleUserInput(cssValue));
         this.ui.onCheck(() => this.check());
         this.ui.onNextLevel(() => this.nextLevel());
+        this.ui.onPrevLevel(() => this.prevLevel());
         this.ui.onHint(() => this.hint());
         this.ui.onReset(() => this.reset());
         this.loadCurrentLevel();
@@ -21,7 +23,17 @@ export class GameEngine {
 
     loadCurrentLevel() {
         const level = this.levels[this.currentLevelIndex];
+        const alreadySolved = this.currentLevelIndex < this.highestLevelReached;
         this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
+        this.ui.setNextButtonState(alreadySolved);
+        this.ui.setPrevButtonState(this.currentLevelIndex > 0);
+    }
+
+    prevLevel() {
+        if (this.currentLevelIndex > 0) {
+            this.currentLevelIndex--;
+            this.loadCurrentLevel();
+        }
     }
 
     handleUserInput(cssValue) {
@@ -47,11 +59,12 @@ export class GameEngine {
     nextLevel() {
         if (this.currentLevelIndex < this.levels.length - 1) {
             this.currentLevelIndex++;
+            if (this.currentLevelIndex > this.highestLevelReached) {
+                this.highestLevelReached = this.currentLevelIndex;
+            }
             this.loadCurrentLevel();
         } else {
             alert('Great job! You finished all levels! 🎉');
-            this.currentLevelIndex = 0;
-            this.loadCurrentLevel();
         }
     }
 

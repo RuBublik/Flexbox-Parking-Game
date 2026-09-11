@@ -3,11 +3,13 @@ export class UI {
         this.spotsLayer = document.getElementById('pads-layer');
         this.carsLayer = document.getElementById('cars-layer');
         this.nextBtn = document.getElementById('next-btn');
+        this.prevBtn = document.getElementById('prev-btn');
         this.hintBtn = document.getElementById('hint-btn');
         this.checkBtn = document.getElementById('check-btn');
         this.resetBtn = document.getElementById('reset-btn');
         this.instructionsArea = document.getElementById('instructions');
-        this.levelIndicator = document.getElementById('level-indicator');
+        this.levelIndicatorNumeric = document.getElementById('level-indicator-numeric');
+        this.levelIndicatorName = document.getElementById('level-indicator-name');
         this.userCodeInput = document.getElementById('css-input-user-code');
         this.codeEditor = document.querySelector('.code-editor');
         this.feedbackEl = document.getElementById('check-feedback');
@@ -19,8 +21,9 @@ export class UI {
         if (this.instructionsArea) {
             this.instructionsArea.innerHTML = `<p>${level.instructions}</p>`;
         }
-        if (this.levelIndicator) {
-            this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels} — ${level.name}`;
+        if (this.levelIndicatorNumeric && this.levelIndicatorName) {
+            this.levelIndicatorNumeric.textContent = `Level: ${levelIndex + 1} of ${totalLevels}`;
+            this.levelIndicatorName.textContent = `${level.name}`;
         }
         if (this.userCodeInput) {
             this.userCodeInput.value = '';
@@ -32,7 +35,6 @@ export class UI {
 
         this.carsLayer.style.cssText = '';
         this.spotsLayer.style.cssText = level.spotStyle || '';
-        this.setNextButtonState(false);
         this.createBoardItems(level);
     }
 
@@ -77,6 +79,13 @@ export class UI {
 
     onNextLevel(callback) {
         this.nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
+    }
+
+    onPrevLevel(callback) {
+        this.prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             callback();
         });
@@ -138,6 +147,12 @@ export class UI {
     setNextButtonState(enabled) {
         if (this.nextBtn) {
             this.nextBtn.disabled = !enabled;
+        }
+    }
+
+    setPrevButtonState(enabled) {
+        if (this.prevBtn) {
+            this.prevBtn.disabled = !enabled;
         }
     }
 
