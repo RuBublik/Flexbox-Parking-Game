@@ -5,10 +5,12 @@ export class UI {
         this.nextBtn = document.getElementById('next-btn');
         this.hintBtn = document.getElementById('hint-btn');
         this.checkBtn = document.getElementById('check-btn');
+        this.resetBtn = document.getElementById('reset-btn');
         this.instructionsArea = document.getElementById('instructions');
         this.levelIndicator = document.getElementById('level-indicator');
         this.userCodeInput = document.getElementById('css-input-user-code');
         this.codeEditor = document.querySelector('.code-editor');
+        this.feedbackEl = document.getElementById('check-feedback');
     }
 
     renderLevel(level, levelIndex, totalLevels) {
@@ -18,10 +20,14 @@ export class UI {
             this.instructionsArea.innerHTML = `<p>${level.instructions}</p>`;
         }
         if (this.levelIndicator) {
-            this.levelIndicator.textContent = `Level: ${level.name}`;
+            this.levelIndicator.textContent = `Level ${levelIndex + 1} of ${totalLevels} — ${level.name}`;
         }
         if (this.userCodeInput) {
             this.userCodeInput.value = '';
+        }
+        if (this.feedbackEl) {
+            this.feedbackEl.textContent = '';
+            this.feedbackEl.className = '';
         }
 
         this.carsLayer.style.cssText = '';
@@ -90,10 +96,23 @@ export class UI {
         });
     }
 
+    onReset(callback) {
+        this.resetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            callback();
+        });
+    }
+
     showHint(hint) {
         if (this.userCodeInput) {
             this.userCodeInput.value = hint;
         }
+    }
+
+    showFeedback(message, isSuccess) {
+        if (!this.feedbackEl) return;
+        this.feedbackEl.textContent = message;
+        this.feedbackEl.className = isSuccess ? 'success' : 'error';
     }
 
     shakeNextBtnVertical() {

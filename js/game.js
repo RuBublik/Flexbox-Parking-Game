@@ -11,6 +11,11 @@ export class GameEngine {
         this.ui.onCheck(() => this.check());
         this.ui.onNextLevel(() => this.nextLevel());
         this.ui.onHint(() => this.hint());
+        this.ui.onReset(() => this.reset());
+        this.loadCurrentLevel();
+    }
+
+    reset() {
         this.loadCurrentLevel();
     }
 
@@ -31,9 +36,11 @@ export class GameEngine {
         if (isWin) {
             this.ui.setNextButtonState(true);
             this.ui.shakeNextBtnVertical();
+            this.ui.showFeedback('Correct! :D', true);
         } else {
             this.ui.setNextButtonState(false);
             this.ui.shakeEditorHorizontal();
+            this.ui.showFeedback('Wrong, try again.', false);
         }
     }
 
