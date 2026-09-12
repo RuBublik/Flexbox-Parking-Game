@@ -7,7 +7,7 @@ export class GameEngine {
         this.levels = levels;
         this.ui = ui;
         this.currentLevelIndex = 0;
-        this.highestLevelSolved = 0;
+        this.highestLevelSolved = -1; // nothing solved yet
         this.score = 0;
         this.hintUsedForCurrentLevel = false;
         this.currentUserCss = '';
@@ -21,7 +21,7 @@ export class GameEngine {
             const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
             if (saved) {
                 this.currentLevelIndex = saved.currentLevelIndex || 0;
-                this.highestLevelSolved = saved.highestLevelSolved || 0;
+                this.highestLevelSolved = saved.highestLevelSolved ?? -1;
                 this.score = saved.score || 0;
                 this.state = saved.state || {};
             }
@@ -52,7 +52,7 @@ export class GameEngine {
 
     reset() {
         this.currentLevelIndex = 0;
-        this.highestLevelSolved = 0;
+        this.highestLevelSolved = -1;
         this.score = 0;
         this.hintUsedForCurrentLevel = false;
         this.currentUserCss = '';
@@ -77,7 +77,7 @@ export class GameEngine {
 
     applyLevelState() {
         const level = this.levels[this.currentLevelIndex];
-        const alreadySolved = this.currentLevelIndex < this.highestLevelSolved;
+        const alreadySolved = this.currentLevelIndex <= this.highestLevelSolved;
         const savedState = this.state[this.currentLevelIndex];
         this.hintUsedForCurrentLevel = savedState ? savedState.hintUsed : false;
         this.ui.renderLevel(level, this.currentLevelIndex, this.levels.length);
